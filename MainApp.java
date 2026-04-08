@@ -1,25 +1,40 @@
-public class MainApp {
+public class Calculator {
+
+    // Methods
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public int subtract(int a, int b) {
+        return a - b;
+    }
+
+    public int multiply(int a, int b) {
+        return a * b;
+    }
+
+    public int divide(int a, int b) {
+        if (b == 0) {
+            throw new ArithmeticException("Division by zero is not allowed.");
+        }
+        return a / b;
+    }
+
+    // Main method (execution starts here)
     public static void main(String[] args) {
 
         Calculator cal = new Calculator();
 
-        // Perform operations
-        int addResult = cal.add(2, 3);
-        int subResult = cal.subtract(5, 2);
-        int mulResult = cal.multiply(4, 5);
-        int divResult = cal.divide(10, 2);
+        System.out.println("Addition: " + cal.add(2, 3));
+        System.out.println("Subtraction: " + cal.subtract(5, 2));
+        System.out.println("Multiplication: " + cal.multiply(4, 5));
+        System.out.println("Division: " + cal.divide(10, 2));
 
-        // Display results
-        System.out.println("Addition: 2 + 3 = " + addResult);
-        System.out.println("Subtraction: 5 - 2 = " + subResult);
-        System.out.println("Multiplication: 4 * 5 = " + mulResult);
-        System.out.println("Division: 10 / 2 = " + divResult);
-
-        // Division by zero (handled safely)
+        // Handling exception
         try {
             cal.divide(10, 0);
         } catch (ArithmeticException e) {
-            System.out.println("Exception caught: " + e.getMessage());
+            System.out.println("Exception: " + e.getMessage());
         }
     }
 }
