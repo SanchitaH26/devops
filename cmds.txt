@@ -1,3 +1,95 @@
+exp1:
+git init
+git config --global user.name "Your Name"
+git config --global user.email your_email@example.com
+echo "This is my first Git experiment" > README.txt
+git status
+git add README.txt or git add . 
+git status
+git commit -m "Initial commit"
+echo "Git tracks file changes" >> README.txt
+git add README.txt
+git commit -m "Updated README file"
+git log
+
+exp2:
+git init
+git branch
+git branch feature-branch
+git checkout feature-branch
+git status
+git add .
+git commit -m "Added new feature in feature branch"
+git checkout main
+git add .
+git commit -m "Updated file in main branch"
+git merge feature-branch
+git mergetool or manually remove
+git add <filename>
+git commit
+git branch -d feature-branch
+
+exp3:
+git init
+git remote add origin https://github.com/YourUsername/git-lab-demo.git
+git add main.py
+git commit -m "Add main.py file"
+git push origin main
+after making change in git pull origin main (better don't do)
+
+exp4:
+touch file1.txt
+echo "This file is created in master branch" > file1.txt
+git status
+git add file1.txt
+git commit -m "Initial commit in master"
+git push origin main
+git branch feature-1
+git checkout feature-1
+echo "This change is from feature-1 branch" >> file1.txt
+touch feature.txt
+echo "Feature branch file" > feature.txt
+git status
+git add .
+git commit -m "Changes done in feature-1"
+git push origin feature-1
+git checkout master
+git pull origin master
+git branch -d feature-1
+git push origin --delete feature-1
+
+exp5:
+git tag v1.0
+git tag
+git add -a v1.2 -m “v1.2 Created”
+git tag 
+git show v1.0
+git tag -l “v1.*”
+git push origin v1.0
+git tag v2.0
+git push --tags
+git tag -d v1.0
+git push origin -d v1.0
+
+exp6:
+mvn archetype:generate
+com.bnmit
+sample-app
+1.0-snapshot
+com.bnmit
+cd sample-app
+mvn package
+mvn clean 
+mvn package
+mvn site
+cd target
+java -cp sample-app-1.0-SNAPSHOT.jar com.bnmit.BankService
+
+exp7:
+javac BankService.java
+java BankService
+
+
 exp12:
 mvn archetype:generate
 mvn clean test
@@ -5,6 +97,7 @@ mvn clean test
 exp14:
 mvn archetype:generate
 mvn clean test
+don't forget to change pom.xml
 
 exp15:
 docker --version
@@ -22,7 +115,25 @@ exp16:
 docker build -t my-python-app .
   docker images
 docker run my-python-app
-  docker run -p 5000:5000 my-python-app1
+// not needed docker run -p 5000:5000 my-python-app1
+dockerfile for normal app.py:
+FROM python:3.9-slim
+WORKDIR /app
+COPY app.py .
+CMD ["python", "app.py"]
+
+for webapp thing in 16th exp:
+1)	Dockerfile for app.py
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY app.py .
+
+EXPOSE 5020
+
+CMD ["python", "app.py"]
+
 
 exp17:
 docker run -d nginx
@@ -41,6 +152,14 @@ echo "<h1>Persistent Web Page</h1>" > /data/index.html
 exit
 
 exp18:
+dockerfile:
+FROM eclipse-temurin:17-jdk
+WORKDIR /app
+COPY . /app
+RUN javac Grade.java
+CMD ["java", "Grade"]
+
+
 docker build -t java-app .
 docker login
 docker tag java-app yourusername/java-app:v1
@@ -49,3 +168,29 @@ docker push yourusername/java-app:v1
 exp19:
 docker build -t java-app .
 docker run -d -t java-app
+
+exp 20:
+mvn archetype:generate
+maven-archetype-webapp
+3
+com.example
+sample-webapp
+enter twice for default ans
+in src create test folder foloowed by test->java->com->example->HelloServletTest.java
+in main: java->com->example->HelloServlet.java
+in same place as src create Dockerfile and Jenkinsfile
+copy paste all the code and don't forget to change pom.xml
+
+if tomcat is not there, then create dockerfile in same directory as sample-webapp.war:
+FROM tomcat:10.1-jdk21
+
+RUN rm -rf /usr/local/tomcat/webapps/*
+
+COPY sample-webapp.war /usr/local/tomcat/webapps/ROOT.war
+
+EXPOSE 8091
+
+then in same path exec foll. cmds:
+
+docker build -t sample-app .
+docker run -d -p 8091:8080 sample-app
