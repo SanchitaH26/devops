@@ -1,3 +1,5 @@
+dockerhub password: sanchi@123 username:sanchitah26
+github username: SanchitaH26 password: SanchitaH26
 exp1:
 git init
 git config --global user.name "Your Name"
